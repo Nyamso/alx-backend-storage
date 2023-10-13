@@ -1,8 +1,5 @@
--- This SQL script select origin column, 
--- sum of fans column as nb_fans, 
--- grouped by origin and ordered by nb_fans descending from 'metal_bands' table.
-
-SELECT origin, SUM(fans) AS nb_fans
+-- This SQL script select band_name, and lifespan column which is difference
+SELECT band_name, (IFNULL(split, '2020') - formed) AS lifespan
     FROM metal_bands
-    GROUP BY origin
-    ORDER BY nb_fans DESC;
+    WHERE FIND_IN_SET('Glam rock', IFNULL(style, "")) > 0
+    ORDER BY lifespan DESC;
